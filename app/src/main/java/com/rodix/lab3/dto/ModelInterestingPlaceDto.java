@@ -1,8 +1,6 @@
 package com.rodix.lab3.dto;
 
 import com.google.gson.annotations.SerializedName;
-import com.rodix.lab3.InfoInterestingPlaceDialog;
-import com.rodix.lab3.adapter.InterestingPlacesAdapter;
 
 
 public class ModelInterestingPlaceDto {

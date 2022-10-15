@@ -13,7 +13,6 @@
         android:text="Название"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +26,6 @@
         android:layout_marginTop="8dp"
         android:text="Страна"
         android:textAllCaps="true"
-        android:textColor="@color/black"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +38,6 @@
         android:layout_marginTop="8dp"
         android:text="Погода"
         android:textAllCaps="true"
-        android:textColor="@color/black"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +72,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Температура(C)"
-                    android:textColor="@color/black"
                     android:textStyle="bold" />
 
                 <TextView
@@ -102,7 +98,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Скорость ветра(м/c)"
-                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <TextView
@@ -140,7 +135,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Видимость(м)"
-                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <TextView
@@ -167,7 +161,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Влажность(%)"
-                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <TextView
@@ -207,7 +200,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Давление(Pa)"
-                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <TextView
@@ -233,7 +225,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Погодные условия"
-                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <TextView
@@ -270,7 +261,6 @@
         android:layout_marginTop="8dp"
         android:text="Интересные места рядом"
         android:textAllCaps="true"
-        android:textColor="@color/black"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"

@@ -9,14 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.rodix.lab3.InfoInterestingPlaceDialog;
+import com.rodix.lab3.dialog.InfoInterestingPlaceDialog;
 import com.rodix.lab3.R;
-import com.rodix.lab3.adapter.GraphhopperPlacesAdapter;
 import com.rodix.lab3.adapter.InterestingPlacesAdapter;
 import com.rodix.lab3.model.ModelGeoPlace;
 import com.rodix.lab3.model.ModelInterestingPlace;
 import com.rodix.lab3.model.ModelWeatherPlace;
-import com.rodix.lab3.service.RetrofitGraphhopperService;
 import com.rodix.lab3.service.RetrofitOpentripmapService;
 import com.rodix.lab3.service.RetrofitOpenweathermapService;
 
@@ -24,7 +22,6 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 

@@ -24,7 +24,6 @@ public class SearchActivity extends AppCompatActivity {
     GraphhopperPlacesAdapter graphhopperAdapter;
     Button searchButton;
     EditText searchEdit;
-    RetrofitGraphhopperService retrofitGraphhopperService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +44,6 @@ public class SearchActivity extends AppCompatActivity {
         searchButton.setOnClickListener(view -> graphhopperService.getListPlace(searchEdit.getText().toString(), searchEdit.getTextLocale().getDisplayLanguage())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(SearchActivity.this::change));
-
-
-        //    ArrayList<ModelGeoPlace.Place> places = new ArrayList<>();
-        //   places.add(new ModelGeoPlace.Place(new ModelGeoPlace.Place.Point(1, 2), "Russia", "Novosibirsk", "NSU", "Good", "630054"));
-        //   graphhopperAdapter.setPlaces(places);
-
-        //  graphhopperService.getListPlace("Berlin", "en").observeOn(AndroidSchedulers.mainThread()).subscribe(this::change);
     }
 
     private void change(List<ModelGeoPlace> places) {

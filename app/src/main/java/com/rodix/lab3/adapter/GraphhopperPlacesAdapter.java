@@ -36,7 +36,6 @@ public class GraphhopperPlacesAdapter extends RecyclerView.Adapter<GraphhopperPl
         this.places = places;
     }
 
-
     @NonNull
     @Override
     public RecyclerViewAdapter onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

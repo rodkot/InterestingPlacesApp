@@ -43,14 +43,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textStyle="bold"
-                android:textAllCaps="true"
                 android:text="Страна"
-                />
+                android:textAllCaps="true"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/country"

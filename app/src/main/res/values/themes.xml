@@ -13,12 +13,10 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-    <style name="AppTheme.FullScreenDialog" parent="Theme.MaterialComponents.Light.Dialog">
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
+    <style name="AppTheme.FullScreenDialog" parent="AppTheme" >
+
         <item name="android:windowIsFloating">false</item>
-        <item name="android:windowBackground">@android:color/white</item>
+
         <item name="actionMenuTextColor">@color/colorAccent</item>
     </style>
     <style name="AppTheme.Slide">

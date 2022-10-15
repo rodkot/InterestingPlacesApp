@@ -25,8 +25,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
-import rx.Subscription;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 public class RetrofitOpentripmapService {
@@ -72,7 +70,7 @@ public class RetrofitOpentripmapService {
 
     public Observable<List<ModelInterestingPlace>> getListInterestingPlacesAroundPlace(ModelGeoPlace place) {
         return apiService
-                .getInterestingPlace("ru", 100000.2, place.getLng(), place.getLat(), "json", 100,"wikidata","interesting_places")
+                .getInterestingPlace(Constant.LANG_ISO, Constant.DEFAULT_RADIUS_SEARCH, place.getLng(), place.getLat(), Constant.FORMAT_JSON, Constant.DEFAULT_COUNT_SEARCH, Constant.DEFAULT_SRC_SEARCH, Constant.DEFAULT_KIND_PLACE_SEARCH)
                 .map(mainInfoDtos -> mainInfoDtos.stream().map(mainInfoDto -> {
                     ModelInterestingPlaceDto modelInterestingPlaceDto = new ModelInterestingPlaceDto(mainInfoDto, null);
                     ModelInterestingPlaceMapper mapper = new ModelInterestingPlaceMapper();
@@ -81,7 +79,7 @@ public class RetrofitOpentripmapService {
     }
 
     public Observable<ModelInterestingPlace> getDescriptionInterestingPlace(ModelInterestingPlace place) {
-        return apiService.getDescriptionPlace("ru", place.getXid()).map(descriptionDto -> {
+        return apiService.getDescriptionPlace(Constant.LANG_ISO, place.getXid()).map(descriptionDto -> {
             ModelInterestingPlaceDto modelInterestingPlaceDto = new ModelInterestingPlaceDto(new ModelInterestingPlaceDto.MainInfoDto(place.getXid(), place.getName()), descriptionDto);
             ModelInterestingPlaceMapper mapper = new ModelInterestingPlaceMapper();
             return mapper.mapToModel(modelInterestingPlaceDto);

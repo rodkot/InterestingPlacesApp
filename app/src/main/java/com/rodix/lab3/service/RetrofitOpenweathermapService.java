@@ -28,11 +28,9 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 public class RetrofitOpenweathermapService {
-    private static final String TAG = RetrofitOpenweathermapService.class.getSimpleName();
-
     private final OpenweathermapServiceApi apiService;
-    private static Subscription subscription;
     private static RetrofitOpenweathermapService instance;
+
     public RetrofitOpenweathermapService() {
         RxJavaCallAdapterFactory rxAdapter = RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io());
 
@@ -60,7 +58,6 @@ public class RetrofitOpenweathermapService {
                 .build();
 
         apiService = retrofit.create(OpenweathermapServiceApi.class);
-
     }
 
     public static RetrofitOpenweathermapService getInstance() {
@@ -70,11 +67,11 @@ public class RetrofitOpenweathermapService {
         return instance;
     }
 
-    public Observable<ModelWeatherPlace> getWeatherPlace(Double lat, Double lon){
-        return apiService.getWeatherPlace(lat,lon,"metric","ru")
+    public Observable<ModelWeatherPlace> getWeatherPlace(Double lat, Double lon) {
+        return apiService.getWeatherPlace(lat, lon, Constant.DEFAULT_MEASUREMENT_SYSTEM, Constant.LANG_ISO)
                 .map(modelWeatherPlaceDto -> {
-            ModelWeatherPlaceMapperImpl mapper = new ModelWeatherPlaceMapperImpl();
-           return mapper.mapToModel(modelWeatherPlaceDto);
-        });
+                    ModelWeatherPlaceMapperImpl mapper = new ModelWeatherPlaceMapperImpl();
+                    return mapper.mapToModel(modelWeatherPlaceDto);
+                });
     }
 }
