@@ -68,9 +68,9 @@ public class RetrofitOpentripmapService {
         return instance;
     }
 
-    public Observable<List<ModelInterestingPlace>> getListInterestingPlacesAroundPlace(ModelGeoPlace place) {
+    public Observable<List<ModelInterestingPlace>> getListInterestingPlacesAroundPlace(ModelGeoPlace place, Double radius) {
         return apiService
-                .getInterestingPlace(Constant.LANG_ISO, Constant.DEFAULT_RADIUS_SEARCH, place.getLng(), place.getLat(), Constant.FORMAT_JSON, Constant.DEFAULT_COUNT_SEARCH, Constant.DEFAULT_SRC_SEARCH, Constant.DEFAULT_KIND_PLACE_SEARCH)
+                .getInterestingPlace(Constant.LANG_ISO, radius, place.getLng(), place.getLat(), Constant.FORMAT_JSON, Constant.DEFAULT_COUNT_SEARCH, Constant.DEFAULT_SRC_SEARCH, Constant.DEFAULT_KIND_PLACE_SEARCH)
                 .map(mainInfoDtos -> mainInfoDtos.stream().map(mainInfoDto -> {
                     ModelInterestingPlaceDto modelInterestingPlaceDto = new ModelInterestingPlaceDto(mainInfoDto, null);
                     ModelInterestingPlaceMapper mapper = new ModelInterestingPlaceMapper();

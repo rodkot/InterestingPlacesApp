@@ -2,6 +2,7 @@ package com.rodix.lab3.acvities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -26,10 +27,12 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 
 public class PlaceInfoActivity extends AppCompatActivity {
-    TextView nameView, stateView, tempView, windView, visibilityView, humidityView, pressureView, descriptionView;
+    TextView nameView, stateView, tempView, windView, visibilityView, humidityView, pressureView, descriptionView, radiusView;
     RecyclerView interestingPlaceView;
+    SeekBar seekRadius;
     InterestingPlacesAdapter interestingPlacesAdapter;
     ModelGeoPlace place;
+    Double radius;
     RetrofitOpenweathermapService openweathermapService;
     RetrofitOpentripmapService opentripmapService;
 
@@ -42,12 +45,14 @@ public class PlaceInfoActivity extends AppCompatActivity {
         stateView = findViewById(R.id.state_view);
         tempView = findViewById(R.id.temp);
         windView = findViewById(R.id.wind);
+        radiusView = findViewById(R.id.radius_view);
+        seekRadius = findViewById(R.id.seek_radius);
         visibilityView = findViewById(R.id.visibility);
         humidityView = findViewById(R.id.humidity);
         pressureView = findViewById(R.id.pressure);
         descriptionView = findViewById(R.id.description);
-
         interestingPlaceView = findViewById(R.id.view_intr_place);
+
 
         Intent i = getIntent();
         place = (ModelGeoPlace) i.getSerializableExtra("place");
@@ -61,16 +66,6 @@ public class PlaceInfoActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::viewWeatherPlace);
 
-        opentripmapService
-                .getListInterestingPlacesAroundPlace(place)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<ModelInterestingPlace>>() {
-                    @Override
-                    public void call(List<ModelInterestingPlace> mainInfos) {
-                        interestingPlacesAdapter.setPlaces(mainInfos);
-                        interestingPlacesAdapter.notifyDataSetChanged();
-                    }
-                });
 
         interestingPlacesAdapter = new InterestingPlacesAdapter();
 
@@ -81,14 +76,38 @@ public class PlaceInfoActivity extends AppCompatActivity {
         interestingPlacesAdapter.getmViewClickSubject().observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<ModelInterestingPlace>() {
             @Override
             public void call(ModelInterestingPlace place) {
-              opentripmapService.getDescriptionInterestingPlace(place).subscribe(new Action1<ModelInterestingPlace>() {
-                  @Override
-                  public void call(ModelInterestingPlace modelInterestingPlace) {
-                      InfoInterestingPlaceDialog dialog = new InfoInterestingPlaceDialog(modelInterestingPlace);
-                      dialog.display(getSupportFragmentManager());
-                  }
-              });
+                opentripmapService.getDescriptionInterestingPlace(place).subscribe(new Action1<ModelInterestingPlace>() {
+                    @Override
+                    public void call(ModelInterestingPlace modelInterestingPlace) {
+                        InfoInterestingPlaceDialog dialog = new InfoInterestingPlaceDialog(modelInterestingPlace);
+                        dialog.display(getSupportFragmentManager());
+                    }
+                });
 
+            }
+        });
+
+        seekRadius.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                radius = (double) i;
+                radiusView.setText(String.valueOf(i));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                opentripmapService
+                        .getListInterestingPlacesAroundPlace(place, radius)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(mainInfos -> {
+                            interestingPlacesAdapter.setPlaces(mainInfos);
+                            interestingPlacesAdapter.notifyDataSetChanged();
+                        });
             }
         });
     }

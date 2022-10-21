@@ -62,10 +62,10 @@ public class ModelGeoPlaceDto {
     public static class PointDto implements Serializable {
 
         @SerializedName("lat")
-        private double lat;
+        private final double lat;
 
         @SerializedName("lng")
-        private double lng;
+        private final double lng;
 
         public PointDto(double lat, double lng) {
             this.lat = lat;

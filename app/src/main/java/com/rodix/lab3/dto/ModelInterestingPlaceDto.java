@@ -89,9 +89,9 @@ public class ModelInterestingPlaceDto {
 
     public static class MainInfoDto {
         @SerializedName("xid")
-        private String xid;
+        private final String xid;
         @SerializedName("name")
-        private String name;
+        private final String name;
 
         public MainInfoDto(String xid, String name) {
             this.xid = xid;
